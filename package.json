@@ -2,7 +2,8 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "npx nodemon server.js"
+    "start": "node server.js",
+    "watch": "npx nodemon server.js"
   },
   "dependencies": {
     "discord.js": "^13.10.3",
