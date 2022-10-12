@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "npx nodemon server.js"
   },
   "dependencies": {
     "discord.js": "^13.10.3",
@@ -26,5 +26,8 @@
   "volta": {
     "node": "16.17.1",
     "yarn": "1.22.19"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
