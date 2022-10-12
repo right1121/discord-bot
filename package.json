@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "discord.js": "^13.10.3",
+    "querystring": "^0.2.1",
+    "node-cron": "^3.0.2"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ],
+  "volta": {
+    "node": "16.17.1",
+    "yarn": "1.22.19"
+  }
+}
