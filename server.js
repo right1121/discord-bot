@@ -55,7 +55,6 @@ http.createServer(function(req, res){
 //if Bot status is "ready", call this function. It7s start log and Set status of Bot.
 client.on('ready', () =>{
   console.log('Bot_Ready');
-  client.user.setActivity('Game', { type: 'PLAYING' });
   client.channels.cache.get(process.env.DEV_NOTIFICATIONS_CHANNEL_ID).send('Bot Ready')
 });
 
