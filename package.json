@@ -2,8 +2,8 @@
   "version": "0.0.1",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "watch": "npx nodemon server.js"
+    "start": "node --es-module-specifier-resolution=node server.js",
+    "watch": "npx nodemon --es-module-specifier-resolution=node server.js"
   },
   "dependencies": {
     "discord.js": "^13.10.3",
@@ -15,6 +15,7 @@
   "engines": {
     "node": "16.x"
   },
+  "type": "module",
   "repository": {
     "url": "https://glitch.com/edit/#!/hello-express"
   },
