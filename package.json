@@ -3,7 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node --es-module-specifier-resolution=node server.js",
-    "watch": "npx nodemon --es-module-specifier-resolution=node server.js"
+    "watch": "npx nodemon --es-module-specifier-resolution=node server.js",
   },
   "dependencies": {
     "discord.js": "^13.10.3",
