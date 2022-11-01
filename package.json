@@ -3,7 +3,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node --es-module-specifier-resolution=node server.js",
-    "watch": "npx nodemon --es-module-specifier-resolution=node server.js"
+    "watch": "npx nodemon --es-module-specifier-resolution=node server.js",
+    "lint": "eslint --ext .jsx,.js,.tsx,.ts .",
+    "lint:fix": "eslint --fix --ext .jsx,.js,.tsx,.ts ."
   },
   "dependencies": {
     "discord.js": "^13.10.3",
@@ -30,6 +32,11 @@
     "yarn": "1.22.19"
   },
   "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
     "nodemon": "^2.0.20"
   }
 }
