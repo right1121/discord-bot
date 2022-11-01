@@ -4,8 +4,6 @@ import { getJstDate } from '../util'
 const NOTIFICATION_START_HOUR = 6
 /** 通知終了時間 */
 const NOTIFICATION_STOP_HOUR = 0
-/** 対象VoiceチャンネルID */
-const TARGET_VOICE_CHANNEL = process.env.VOICE_CHANNEL_ID
 
 /**
  * メッセージの送信可能時間か
@@ -29,7 +27,7 @@ const sendMessage = (client, text) => {
  * @returns
  */
 const isTargetChannel = (guildMember) => {
-  return guildMember.channelId !== TARGET_VOICE_CHANNEL
+  return guildMember.channelId === process.env.VOICE_CHANNEL_ID
 }
 
 /**
