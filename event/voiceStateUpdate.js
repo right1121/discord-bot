@@ -18,7 +18,7 @@ const isAllowSendTime = () => {
  * メッセージの送信
  */
 const sendMessage = (client, text) => {
-  if (!isAllowSendTime) return
+  if (!isAllowSendTime()) return
   client.channels.cache.get(process.env.TEXT_CHANNEL_ID).send(text)
 }
 
