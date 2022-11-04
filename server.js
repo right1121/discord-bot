@@ -5,14 +5,14 @@
 
 import http from 'http'
 import querystring from 'querystring'
-import { Client, Intents } from 'discord.js'
+import { Client, GatewayIntentBits } from 'discord.js'
 import dotenv from 'dotenv'
 
 import { voiceStateUpdate } from './event'
 
 dotenv.config()
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] })
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildVoiceStates] })
 
 // 叩き起こすためのサーバーを設置する make zombie server with google scripts
 http.createServer(function (req, res) {
