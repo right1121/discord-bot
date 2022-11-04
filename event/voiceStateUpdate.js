@@ -1,23 +1,23 @@
 import { getJstDate } from '../util'
 
 /** 通知開始時間 */
-const NOTIFICATION_START_HOUR = 6
+export const NOTIFICATION_START_HOUR = 6
 /** 通知終了時間 */
-const NOTIFICATION_STOP_HOUR = 0
+export const NOTIFICATION_STOP_HOUR = 0
 
 /**
  * メッセージの送信可能時間か
+ * @param {Date} 現在時刻
  */
-const isAllowSendTime = () => {
-  const jstnow = getJstDate()
-  const nowHour = jstnow.getHours()
+export const isAllowSendTime = (currentDate = getJstDate()) => {
+  const nowHour = currentDate.getHours()
   return NOTIFICATION_START_HOUR <= nowHour || nowHour < NOTIFICATION_STOP_HOUR
 }
 
 /**
  * メッセージの送信
  */
-const sendMessage = (client, text) => {
+export const sendMessage = (client, text) => {
   if (!isAllowSendTime()) return
   client.channels.cache.get(process.env.TEXT_CHANNEL_ID).send(text)
 }
@@ -26,7 +26,7 @@ const sendMessage = (client, text) => {
  * 対象のVoiceチャンネルか
  * @returns
  */
-const isTargetChannel = (guildMember) => {
+export const isTargetChannel = (guildMember) => {
   return guildMember.channelId === process.env.VOICE_CHANNEL_ID
 }
 
@@ -34,21 +34,21 @@ const isTargetChannel = (guildMember) => {
  * ユーザーがVoiceチャンネルに接続したか
  * VC: VoiceChanel
  */
-const isConnectionVC = (oldGuildMember, newGuildMember) => {
+export const isConnectionVC = (oldGuildMember, newGuildMember) => {
   return oldGuildMember.channelId === null && newGuildMember.channelId !== null
 }
 
 /**
  * ユーザーが初めての通話かどうか
  */
-const isStartCall = (client, newGuildMember) => {
+export const isStartCall = (client, newGuildMember) => {
   return client.channels.cache.get(newGuildMember.channelId).members.size === 1
 }
 
 /**
  * 通話接続時
  */
-const connectionVC = (client, newGuildMember) => {
+export const connectionVC = (client, newGuildMember) => {
   if (isTargetChannel(newGuildMember)) {
     if (isStartCall(client, newGuildMember)) {
       sendMessage(client, `<@${newGuildMember.id}>が通話を開始しました。\n`)
@@ -59,14 +59,14 @@ const connectionVC = (client, newGuildMember) => {
 /**
  * ユーザーがVoiceチャンネルから切断したか
  */
-const isDisconnectionVC = (oldGuildMember, newGuildMember) => {
+export const isDisconnectionVC = (oldGuildMember, newGuildMember) => {
   return oldGuildMember.channelId !== null && newGuildMember.channelId === null
 }
 
 /**
  * 通話切断時
  */
-const disconnectionVC = (client, oldGuildMember) => {
+export const disconnectionVC = (client, oldGuildMember) => {
   if (isTargetChannel(oldGuildMember)) {
     if (isEndCall(client, oldGuildMember)) {
       sendMessage(client, '通話が終了しました。\n')
@@ -77,14 +77,14 @@ const disconnectionVC = (client, oldGuildMember) => {
 /**
  * Voiceチャンネルの通話が終了したか
  */
-const isEndCall = (client, oldGuildMember) => {
+export const isEndCall = (client, oldGuildMember) => {
   return client.channels.cache.get(oldGuildMember.channelId).members.size === 0
 }
 
 /**
  * Voiceチャンネル内で移動があったか
  */
-const isMoveVC = (oldGuildMember, newGuildMember) => {
+export const isMoveVC = (oldGuildMember, newGuildMember) => {
   return oldGuildMember.channelId !== null && newGuildMember.channelId !== null
 }
 
