@@ -1,16 +1,16 @@
 import { getJstDate } from '../util'
 
 /** 通知開始時間 */
-export const NOTIFICATION_START_HOUR = 6
+const NOTIFICATION_START_HOUR = 6
 /** 通知終了時間 */
-export const NOTIFICATION_STOP_HOUR = 0
+const NOTIFICATION_STOP_HOUR = 0
 
 /**
  * メッセージの送信可能時間か
- * @param {Date} 現在時刻
  */
-export const isAllowSendTime = (currentDate = getJstDate()) => {
-  const nowHour = currentDate.getHours()
+const isAllowSendTime = () => {
+  const jstnow = getJstDate()
+  const nowHour = jstnow.getHours()
   return NOTIFICATION_START_HOUR <= nowHour || nowHour < NOTIFICATION_STOP_HOUR
 }
 
@@ -19,7 +19,7 @@ export const isAllowSendTime = (currentDate = getJstDate()) => {
  * @param {import('discord.js').Client} client
  * @param {string} client
  */
-export const sendMessage = (client, text) => {
+const sendMessage = (client, text) => {
   if (!isAllowSendTime()) return
   client.channels.cache.get(process.env.TEXT_CHANNEL_ID).send(text)
 }
@@ -28,7 +28,7 @@ export const sendMessage = (client, text) => {
  * 対象のVoiceチャンネルか
  * @returns
  */
-export const isTargetChannel = (guildMember) => {
+const isTargetChannel = (guildMember) => {
   return guildMember.channelId === process.env.VOICE_CHANNEL_ID
 }
 

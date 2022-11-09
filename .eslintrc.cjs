@@ -10,9 +10,6 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module'
   },
-  plugin: [
-    'jest'
-  ],
   rules: {
     'no-useless-return': 0
   }
