@@ -5,10 +5,10 @@
 
 import http from 'http'
 import querystring from 'querystring'
-import { Client, GatewayIntentBits } from 'discord.js'
+import { Client, GatewayIntentBits, Events } from 'discord.js'
 import dotenv from 'dotenv'
 
-import { voiceStateUpdate } from './event'
+import { voiceStateUpdate, ready } from './event'
 
 dotenv.config()
 
@@ -44,12 +44,7 @@ http.createServer(function (req, res) {
   }
 }).listen(3000)
 
-// ボットが稼働状態になったら呼び出される。関数とステータスを設定している。
-// if Bot status is "ready", call this function. It7s start log and Set status of Bot.
-client.on('ready', () => {
-  console.log('Bot_Ready')
-  client.channels.cache.get(process.env.DEV_NOTIFICATIONS_CHANNEL_ID).send('Bot Ready')
-})
+client.on(Events.ClientReady, ready)
 
 /* 通話用システム部分 for VC messages functions */
 // process.env.XXX みたいなのは全て.envファイルに正しく設定を行えている前提
