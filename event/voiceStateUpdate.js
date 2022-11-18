@@ -1,4 +1,4 @@
-import { getJstDate } from '../util'
+import { getJstDate, setActivity } from '../util'
 
 /** 通知開始時間 */
 const NOTIFICATION_START_HOUR = 6
@@ -57,6 +57,8 @@ export const isStartCall = (client, newState) => {
  * @param {import('discord.js').VoiceState} newState
  */
 export const connectionVC = (client, newState) => {
+  setActivity(client)
+
   if (isTargetChannel(newState)) {
     if (isStartCall(client, newState)) {
       sendMessage(client, `<@${newState.id}>が通話を開始しました。\n`)
@@ -79,6 +81,8 @@ export const isDisconnectionVC = (oldState, newState) => {
  * @param {import('discord.js').VoiceState} oldState
  */
 export const disconnectionVC = (client, oldState) => {
+  setActivity(client)
+
   if (isTargetChannel(oldState)) {
     if (isEndCall(client, oldState)) {
       sendMessage(client, '通話が終了しました。\n')

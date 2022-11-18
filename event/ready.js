@@ -1,4 +1,4 @@
-import { getJstDate } from '../util'
+import { getJstDate, setActivity } from '../util'
 import cron from 'node-cron'
 
 /**
@@ -15,4 +15,6 @@ export const ready = async (client) => {
     const jstnow = getJstDate()
     channel.send(`${jstnow.getHours()} 時になりました。`)
   })
+
+  setActivity(client)
 }
