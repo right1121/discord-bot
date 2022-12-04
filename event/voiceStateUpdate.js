@@ -57,8 +57,6 @@ export const isStartCall = (client, newState) => {
  * @param {import('discord.js').VoiceState} newState
  */
 export const connectionVC = (client, newState) => {
-  setActivity(client)
-
   if (isTargetChannel(newState)) {
     if (isStartCall(client, newState)) {
       sendMessage(client, `<@${newState.id}>が通話を開始しました。\n`)
@@ -81,8 +79,6 @@ export const isDisconnectionVC = (oldState, newState) => {
  * @param {import('discord.js').VoiceState} oldState
  */
 export const disconnectionVC = (client, oldState) => {
-  setActivity(client)
-
   if (isTargetChannel(oldState)) {
     if (isEndCall(client, oldState)) {
       sendMessage(client, '通話が終了しました。\n')
@@ -114,6 +110,8 @@ export const isMoveVC = (oldState, newState) => {
  * @returns {(oldState: import('discord.js').VoiceState, newState: import('discord.js').VoiceState) => void}
  */
 export const voiceStateUpdate = (client) => (oldState, newState) => {
+  setActivity(client)
+
   if (isConnectionVC(oldState, newState)) {
     connectionVC(client, newState)
   } else if (isDisconnectionVC(oldState, newState)) {
